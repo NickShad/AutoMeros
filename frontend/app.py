@@ -9,10 +9,10 @@ from io import BytesIO
 import sys
 sys.path.append(os.path.abspath("../"))
 from backend.segmentation import segment_image
+from pathlib import Path
 
 
-LABELS_PATH = f"../backend/classes_names.txt"
-
+LABELS_PATH = Path(__file__).parent.parent / "backend" / "classes_names.txt"
 
 
 def main():

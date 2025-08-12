@@ -9,14 +9,14 @@ from pathlib import Path
 from collections import namedtuple
 
 
-MODEL_PATH = "../backend/20_ep_ishak.pt"
+MODEL_PATH = Path(__file__).parent.parent / "backend" / "20_ep_ishak.pt"
 IMAGE_SIZE = 640
 CONFIDENCE_THRESHOLD = 0.25
 IOU = 0.45
 CLASSES_LIST = [0, 3, 6, 8, 11, 14, 16, 22]
 
-OUTPUT_DIR = "./runs/segment/predict/crops_by_mask"
-CLASSNAMES_PATH = "./runs/segment/predict/labels/classes_names.txt"
+OUTPUT_DIR = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "crops_by_mask"
+CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "labels" / "classes_names.txt"
 
 ImageTuple = namedtuple("NamedTuple", ("class_idx", "conf", "path"))
 
@@ -168,11 +168,12 @@ def segment_image(image_path: str) -> Tuple[str, List[ImageTuple]]:
 
     predict_dirs = [f for f in os.listdir("./runs/segment") if f.startswith('predict')]
     predict_dir = max(predict_dirs, key=lambda d: int(d[7:]) if len(d) > 7 else 0)
-    segmented_image_path = f"./runs/segment/{predict_dir}/{Path(image_path).name}"
-    OUTPUT_DIR = f"./runs/segment/{predict_dir}/crops_by_mask"
-    CLASSNAMES_PATH = f"./runs/segment/{predict_dir}/labels/classes_names.txt"
-    labels_path = f"./runs/segment/{predict_dir}/labels/{Path(image_path).stem}.txt"
+    segmented_image_path = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / Path(image_path).name
+    OUTPUT_DIR = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / "crops_by_mask"
+    CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / "labels" / "classes_names.txt"
+    labels_path = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir /"labels" / f"{Path(image_path).stem}.txt"
 
+    print(__file__)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     img = cv2.imread(image_path)
