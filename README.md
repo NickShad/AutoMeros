@@ -42,31 +42,21 @@ pip install -r requirements.txt
 
 ### For Windows 10/11 (PowerShell)
 ```powershell
-# Launch PowerShell as Administrator:
-# 1. Press Win+X
-# 2. Select "Windows PowerShell (Admin)"
-# 3. Confirm UAC prompt
+# 1. Install python3.12+ and git
+# 2. Launch PowerShell as Administrator. Press Win+X
 
 # Set execution policy
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-
-# Install Chocolatey package manager
-Set-ExecutionPolicy Bypass -Scope Process -Force
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-# Install Python and Git
-choco install python3.12 git -y
 
 # Clone repository (in regular PowerShell session)
 git clone https://github.com/NickShad/AutoMeros.git
 cd AutoMeros
 
 # Create virtual environment
-python3 -m venv venv
+python -m venv venv
 
 # Activate environment
-.\venv\Scripts\Activate.ps1
+.\venv\Scripts\activate
 
 # Install dependencies
 pip install --upgrade pip
@@ -81,7 +71,7 @@ cd frontend
 streamlit run app.py
 
 # For Windows:
-.\venv\Scripts\Activate.ps1
+.\venv\Scripts\activate
 cd frontend
 streamlit run app.py
 ```
