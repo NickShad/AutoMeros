@@ -17,11 +17,11 @@ IOU = 0.45
 CLASSES_LIST = [0, 3, 6, 8, 11, 14, 16, 22]
 
 if platform == "linux" or platform == "linux2":
-    OUTPUT_DIR = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "crops_by_mask"
-    CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "labels" / "classes_names.txt"
-else:
     OUTPUT_DIR = Path(__file__).parent.parent / "runs" / "segment" / "predict" / "crops_by_mask"
     CLASSNAMES_PATH = Path(__file__).parent.parent / "runs" / "segment" / "predict" / "labels" / "classes_names.txt"
+else:
+    OUTPUT_DIR = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "crops_by_mask"
+    CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "labels" / "classes_names.txt"
 
 ImageTuple = namedtuple("NamedTuple", ("class_idx", "conf", "path"))
 
