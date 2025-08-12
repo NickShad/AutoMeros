@@ -7,6 +7,7 @@ from ultralytics import YOLO
 from typing import Tuple, List, Dict
 from pathlib import Path
 from collections import namedtuple
+from sys import platform
 
 
 MODEL_PATH = Path(__file__).parent.parent / "backend" / "20_ep_ishak.pt"
@@ -15,8 +16,12 @@ CONFIDENCE_THRESHOLD = 0.25
 IOU = 0.45
 CLASSES_LIST = [0, 3, 6, 8, 11, 14, 16, 22]
 
-OUTPUT_DIR = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "crops_by_mask"
-CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "labels" / "classes_names.txt"
+if platform == "linux" or platform == "linux2":
+    OUTPUT_DIR = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "crops_by_mask"
+    CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "labels" / "classes_names.txt"
+else:
+    OUTPUT_DIR = Path(__file__).parent.parent / "runs" / "segment" / "predict" / "crops_by_mask"
+    CLASSNAMES_PATH = Path(__file__).parent.parent / "runs" / "segment" / "predict" / "labels" / "classes_names.txt"
 
 ImageTuple = namedtuple("NamedTuple", ("class_idx", "conf", "path"))
 
@@ -153,6 +158,7 @@ def segment_image(image_path: str) -> Tuple[str, List[ImageTuple]]:
 
     model = YOLO(MODEL_PATH)
 
+    # save_dir = Path(__file__).parent.parent / "frontend"
     prediction = model.predict(
         source=image_path,  # загруженное изображение
         imgsz=IMAGE_SIZE,  # меньше размер -> меньше точность, но больше скорость
@@ -163,15 +169,29 @@ def segment_image(image_path: str) -> Tuple[str, List[ImageTuple]]:
         save_conf=True,  # включает информацию о confidence score в файл
         save_crop=False,  # сохраняет обрезки картинки - почти бесполезно
         show_boxes=False,
-        classes=CLASSES_LIST
+        classes=CLASSES_LIST,
+        # save_dir=save_dir
     )
+    # print(save_dir)
 
-    predict_dirs = [f for f in os.listdir("./runs/segment") if f.startswith('predict')]
+    if platform == "linux" or platform == "linux2":
+        predicted_dir_path = Path(__file__).parent.parent / "frontend"  / "runs" / "segment"
+    else:
+        predicted_dir_path = Path(__file__).parent.parent / "runs" / "segment"
+
+    predict_dirs = [f for f in os.listdir(predicted_dir_path) if f.startswith('predict')]
     predict_dir = max(predict_dirs, key=lambda d: int(d[7:]) if len(d) > 7 else 0)
-    segmented_image_path = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / Path(image_path).name
-    OUTPUT_DIR = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / "crops_by_mask"
-    CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / "labels" / "classes_names.txt"
-    labels_path = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir /"labels" / f"{Path(image_path).stem}.txt"
+
+    if platform == "linux" or platform == "linux2":
+        segmented_image_path = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / Path(image_path).name
+        OUTPUT_DIR = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / "crops_by_mask"
+        CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / "labels" / "classes_names.txt"
+        labels_path = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir /"labels" / f"{Path(image_path).stem}.txt"
+    else:
+        segmented_image_path = Path(__file__).parent.parent / "runs" / "segment" / predict_dir / Path(image_path).name
+        OUTPUT_DIR = Path(__file__).parent.parent / "runs" / "segment" / predict_dir / "crops_by_mask"
+        CLASSNAMES_PATH = Path(__file__).parent.parent  / "runs" / "segment" / predict_dir / "labels" / "classes_names.txt"
+        labels_path = Path(__file__).parent.parent  / "runs" / "segment" / predict_dir /"labels" / f"{Path(image_path).stem}.txt"
 
     print(__file__)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
