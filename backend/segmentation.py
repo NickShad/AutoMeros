@@ -175,9 +175,9 @@ def segment_image(image_path: str) -> Tuple[str, List[ImageTuple]]:
     # print(save_dir)
 
     if platform == "linux" or platform == "linux2":
-        predicted_dir_path = Path(__file__).parent.parent / "frontend"  / "runs" / "segment"
-    else:
         predicted_dir_path = Path(__file__).parent.parent / "runs" / "segment"
+    else:
+        predicted_dir_path = Path(__file__).parent.parent / "frontend" / "runs" / "segment"
 
     predict_dirs = [f for f in os.listdir(predicted_dir_path) if f.startswith('predict')]
     predict_dir = max(predict_dirs, key=lambda d: int(d[7:]) if len(d) > 7 else 0)
