@@ -24,7 +24,7 @@ This Streamlit-based web application allows users to upload car images, performs
 #### For Ubuntu 24.04
 ```bash
 # Update system and install dependencies
-sudo apt updat
+sudo apt update
 sudo apt install python3.12-pip python3.12-venv libgl1-mesa-glx git -y
 
 # Clone repository
