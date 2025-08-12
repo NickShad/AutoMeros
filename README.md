@@ -2,47 +2,6 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>AutoMeros</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            line-height: 1.6;
-            margin: 2rem;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        p {
-            color: #555;
-        }
-        img {
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,.1);
-            width: 300px; /* ширина картинки */
-        }
-        ul {
-            list-style-type: none; /* убираем маркеры и нумерацию */
-            padding-left: 0;
-        }
-        a {
-            text-decoration: none;
-            color: #007bff;
-        }
-        footer {
-            text-align: right;
-            color: #aaa;
-            font-size: small;
-        }
-        .container {
-            display: flex;
-            gap: 20px; /* пространство между картинкой и текстом */
-            justify-content: center;
-            align-items: center; /* вертикальное выравнивание */
-        }
-        .text-side {
-            flex-grow: 1; /* даём максимум пространства текстовому блоку */
-        }
-    </style>
 </head>
 <body>
 <h1 style="color:#007bff;">AutoMeros 🚗</h1>
