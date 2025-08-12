@@ -24,9 +24,7 @@
 </body>
 </html>
 
-# AutoMeros
-AI segmentation model for car details detection
-
+<br></br>
 ## Installation guide
 
 ### Project Overview
