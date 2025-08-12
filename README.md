@@ -24,7 +24,8 @@
 </body>
 </html>
 
-<br></br>
+
+
 ## Installation guide
 
 ### Project Overview
