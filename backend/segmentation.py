@@ -17,8 +17,8 @@ IOU = 0.45
 CLASSES_LIST = [0, 3, 6, 8, 11, 14, 16, 22]
 
 if platform == "linux" or platform == "linux2":
-    OUTPUT_DIR = Path(__file__).parent.parent / "runs" / "segment" / "predict" / "crops_by_mask"
-    CLASSNAMES_PATH = Path(__file__).parent.parent / "runs" / "segment" / "predict" / "labels" / "classes_names.txt"
+    OUTPUT_DIR = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "crops_by_mask"
+    CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "labels" / "classes_names.txt"
 else:
     OUTPUT_DIR = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "crops_by_mask"
     CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / "predict" / "labels" / "classes_names.txt"
@@ -175,7 +175,7 @@ def segment_image(image_path: str) -> Tuple[str, List[ImageTuple]]:
     # print(save_dir)
 
     if platform == "linux" or platform == "linux2":
-        predicted_dir_path = Path(__file__).parent.parent / "runs" / "segment"
+        predicted_dir_path = Path(__file__).parent.parent / "frontend" / "runs" / "segment"
     else:
         predicted_dir_path = Path(__file__).parent.parent / "frontend" / "runs" / "segment"
 
@@ -188,10 +188,10 @@ def segment_image(image_path: str) -> Tuple[str, List[ImageTuple]]:
         CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / "labels" / "classes_names.txt"
         labels_path = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir /"labels" / f"{Path(image_path).stem}.txt"
     else:
-        segmented_image_path = Path(__file__).parent.parent / "runs" / "segment" / predict_dir / Path(image_path).name
-        OUTPUT_DIR = Path(__file__).parent.parent / "runs" / "segment" / predict_dir / "crops_by_mask"
-        CLASSNAMES_PATH = Path(__file__).parent.parent  / "runs" / "segment" / predict_dir / "labels" / "classes_names.txt"
-        labels_path = Path(__file__).parent.parent  / "runs" / "segment" / predict_dir /"labels" / f"{Path(image_path).stem}.txt"
+        segmented_image_path = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / predict_dir / Path(image_path).name
+        OUTPUT_DIR = Path(__file__).parent.parent / "frontend" / "runs" / "segment" / predict_dir / "crops_by_mask"
+        CLASSNAMES_PATH = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir / "labels" / "classes_names.txt"
+        labels_path = Path(__file__).parent.parent / "frontend"  / "runs" / "segment" / predict_dir /"labels" / f"{Path(image_path).stem}.txt"
 
     print(__file__)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
