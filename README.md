@@ -18,7 +18,7 @@
         <p>Использование <em>AutoMeros</em> помогает <strong>снизить нагрузку</strong> на персонал, <strong>повысить точность</strong> диагностики.</p>
     </div>
 </div>
-<br></br>
+
 <footer>Made with ❤️ by DataSet Rolls</footer>
 <br></br>
 </body>
